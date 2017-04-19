@@ -8,10 +8,11 @@ Example output:
 'use strict';
 
 const express = require('express');
+const useragent = require('useragent');
 let app = express();
 
 app.get('/', function (req, res) {
-  let os = req.headers['user-agent'];
+  let os = useragent.parse(req.headers['user-agent']).os.toString();
   res.json({
     ipaddress: req.headers['x-forwarded-for'],
     language: req.headers['accept-language'],
