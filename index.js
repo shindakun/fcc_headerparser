@@ -11,6 +11,11 @@ const express = require('express');
 let app = express();
 
 app.get('/', function (req, res) {
-  res.send('Hello world!');
+  let os = req.headers['user-agent'];
+  res.json({
+    ipaddress: req.headers['x-forwarded-for'],
+    language: req.headers['accept-language'],
+    software: os
+  });
 });
 app.listen(process.env.PORT || 3000);
